@@ -1,5 +1,3 @@
-#(python manage.py -h) - получение справки по всем командам, но покруче
-
 from django.core.management.base import BaseCommand
 from third_app.models import EpicGameModel
 
