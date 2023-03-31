@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
-from third_app.models import EpicGameModel
+from tamam_app.models import EpicGameModel
 
 #--------------django--------------
 
-import requests, json
+import json
 import cloudscraper
 #from datetime import datetime
 
@@ -34,7 +34,11 @@ def parser(os):
 			epic_id = e['id']
 			img = e['keyImages'][0]['url']
 			price_now = e['currentPrice']
-			discountPrice = e['price']['totalPrice']['discountPrice']
+			try:
+				discountPrice = e['price']['totalPrice']['discountPrice']
+			except:
+				print(title)
+				break
 			discount = e['price']['totalPrice']['discount']
 			if discount == 0:
 				flag_is_discount = False

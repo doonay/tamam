@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from third_app.models import XboxGameModel
+from tamam_app.models import XboxGameModel
 
 #--------------django--------------
 

@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from third_app.models import PsAllModel
+from tamam_app.models import PsDealsModel
 
 #--------------django--------------
 
@@ -35,26 +35,20 @@ class PsDealParser:
         page_count = 1
 
         while game_count <= last_game:
-        #for i in range(1, last_game+1, 1):
             # Внимание! В РФ адрес может быть другой!
-            url = f'https://store.playstation.com/tr-tr/category/44d8bb20-653e-431e-8ad0-c0a365f68d2f/{page_count}'
+            url = f'https://store.playstation.com/tr-tr/category/803cee19-e5a1-4d59-a463-0b6b2701bf7c/{page_count}'
             r = SESSION.get(url, headers=headers)
             soup = BeautifulSoup(r.text, 'lxml')
-            
-            #last_game = int(soup.find('div', {'class': "psw-t-body psw-c-t-2"}).get_text().split(' ')[0])
-            #print(soup.find('div', {'class': ["psw-t-body", "psw-c-t-2"]}))
-            
+
             json_string = soup.find('script', {'id': "__NEXT_DATA__"}).get_text() #id="__NEXT_DATA__" type="application/json">
             json_data = json.loads(json_string)
             
             try:
-                last_game = int(json_data['props']['apolloState'][f'$CategoryGrid:44d8bb20-653e-431e-8ad0-c0a365f68d2f:tr-tr:{str(game_count)}:24.pageInfo']['totalCount'])
+                last_game = int(json_data['props']['apolloState'][f'$CategoryGrid:803cee19-e5a1-4d59-a463-0b6b2701bf7c:tr-tr:{str(game_count)}:24.pageInfo']['totalCount'])
             except KeyError:
                 print(f'Скорее всего это финиш и последняя страница не имеет 24 игры.\nlast_game = {last_game}, game_count = {game_count}, page_count = {page_count}')
-                break
 
-            temp_products = json_data['props']['apolloState'][f'CategoryGrid:44d8bb20-653e-431e-8ad0-c0a365f68d2f:tr-tr:{str(game_count)}:24']['products']
-            #print(temp_products)
+            temp_products = json_data['props']['apolloState'][f'CategoryGrid:803cee19-e5a1-4d59-a463-0b6b2701bf7c:tr-tr:{str(game_count)}:24']['products']
             products = []
             for p in temp_products:
                 products.append(p['id'])
@@ -66,19 +60,10 @@ class PsDealParser:
                     print('[', game_count, '/', last_game, ']','Нет в наличии', title)
                     game_count += 1
                     continue
-                elif json_data['props']['apolloState'][price_id]['basePrice'] == 'Ücretsiz':
-                    print('[', game_count, '/', last_game, ']','Бесплатно', title)
-                    game_count += 1
-                    continue
                 else:    
                     base_price = int(json_data['props']['apolloState'][price_id]['basePrice'].strip().replace(',','').replace('.','').replace(' TL', ''))
-                    
-                #print('npTitleId:', json_data['props']['apolloState'][product]['npTitleId'])
-                
+
                 media_id = json_data['props']['apolloState'][product]['media'][-1]['id']
-                #print('serviceBranding:', json_data['props']['apolloState'][price_id]['serviceBranding'])
-                #print('upsellServiceBranding:', json_data['props']['apolloState'][price_id]['upsellServiceBranding'])
-                #print('upsellText:', json_data['props']['apolloState'][price_id]['upsellText'])
 
                 title = json_data['props']['apolloState'][product]['name']
 
@@ -88,18 +73,12 @@ class PsDealParser:
                     print(title, 'пишет, что скидки нет. Проверить!')
                     discount = 0
 
-                if json_data['props']['apolloState'][price_id]['discountedPrice'].strip() == 'Dahil':
-                    print('[', game_count, '/', last_game, ']','Включая (дословно)', title)
-                    discounted_price = 0
-                else:
-                    discounted_price = int(json_data['props']['apolloState'][price_id]['discountedPrice'].strip().replace(',','').replace('.','').replace(' TL', ''))
-
-                psgame = PsAllModel(
+                psgame = PsDealsModel(
                     ps_id = json_data['props']['apolloState'][product]['id'],
                     title = title,
                     platforms = json_data['props']['apolloState'][product]['platforms']['json'],
                     base_price = base_price,
-                    discounted_price = discounted_price,
+                    discounted_price = int(json_data['props']['apolloState'][price_id]['discountedPrice'].strip().replace(',','').replace('.','').replace(' TL', '')),
                     discount = discount,
                     is_free = json_data['props']['apolloState'][price_id]['isFree'],
                     is_exclusive = json_data['props']['apolloState'][price_id]['isExclusive'],
@@ -116,7 +95,7 @@ class PsDealParser:
 #--------------django--------------
 
 class Command(BaseCommand):
-    help = 'PsAllModel'
+    help = 'PsDealsModel'
 
     def handle(self, *args, **options):
         parser = PsDealParser()

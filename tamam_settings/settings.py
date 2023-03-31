@@ -1,5 +1,8 @@
-import configparser
 from pathlib import Path
+import configparser
+
+settings = configparser.RawConfigParser()
+settings.read('config.ini')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,10 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-config = configparser.ConfigParser()
-config.read('example.ini')
-config.sections()
-SECRET_KEY = config['DEFAULT']['SECRET_KEY']
+
+SECRET_KEY = settings['DEFAULT']['SECRET_KEY']
 
 
 
