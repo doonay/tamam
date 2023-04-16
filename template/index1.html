@@ -1,0 +1,348 @@
+<!doctype html>
+{% load static %}
+{% load bot_signal %}
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Main CSS -->  
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <!--<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+  </head>
+  <body>
+
+<style>
+.autocomplete-result-list {
+    width: 100%; /* Устанавливаем ширину списка на 100% */
+    position: absolute; /* Устанавливаем абсолютное позиционирование */
+    top: 100%; /* Устанавливаем отступ сверху на 100% от родительского элемента (поля ввода) */
+    left: 0; /* Выравниваем слева от родительского элемента (поля ввода) */
+    z-index: 1; /* Устанавливаем z-index на 1, чтобы список был поверх остальных элементов */
+    background-color: #fff; /* Устанавливаем фоновый цвет для списка */
+    border: 0px solid #ccc; /* Устанавливаем границу для списка */
+    padding: 10px; /* Устанавливаем отступы внутри списка */
+    box-sizing: border-box; /* Устанавливаем box-sizing на border-box, чтобы учесть границу в расчете ширины элемента */
+    white-space: nowrap; /* Запрещаем перенос слов внутри элементов списка */
+    width: calc(100% - 2px); /* Вычисляем ширину списка как 100% минус 2 пикселя на границу (1px слева и 1px справа) */
+}
+
+.autocomplete-result-list {
+    width: 100%; /* Устанавливаем ширину элементов списка на 100% */
+    padding: 5px; /* Устанавливаем отступы внутри элементов списка */
+    box-sizing: border-box; /* Устанавливаем box-sizing на border-box, чтобы учесть отступы в расчете ширины элемента */
+}
+</style>
+
+
+
+
+
+    <div class="container-fluid steam-bg">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-6 offset-2">
+                    <img class="header-logo" src="{% static 'assets/img/steam-logo-white-44.svg' %}">
+                    <h1>Покупка игр и пополнение кошелька Steam</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      <div class="container buy-tab-menu">
+        <div class="row">
+          <div class="col-8 offset-2">
+            <span class="buy-tab-active">Купить игры</span> <span class="buy-tab">Пополнить кошелек</span>
+            </div>
+          </div>
+      </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-8 offset-2 search-wrapper">
+                    <div id="autocomplete" class="input-group">
+                        <span class="input-group-text search-ico">
+                            <img src="{% static 'assets/img/search-ico.png' %}" style="width: 24px; height: 24px">
+                        </span>
+                        <input id="gamefinder" type="search" class="typeahead form-control search-field" placeholder="Поиск по играм" aria-label="Поиск" aria-describedby="basic-addon1">
+                        <ul class="autocomplete-result-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+<script> //autocomplete
+
+
+
+    new Autocomplete('#autocomplete' , {
+        search : input => {
+        //console.log(input)
+        const url = `/get-games/?search=${input}`
+        //console.log(url);
+        return new Promise(resolve => {
+            fetch(url)
+            .then(response=>response.json())
+            .then(data => {
+                console.log(data.payload);
+                resolve(data.payload)
+                })
+            })
+        },
+        onSubmit : result => {
+            //console.log(result.title)
+            //console.log(result)
+            //console.log(`/payment/${result.title}`)
+            //window.open(`/get-games/?search=${result.title}`)
+            console.log(`/get-games/?search=${result.title}`)
+
+            document.getElementById("gamefinder").value = result.title;
+            document.getElementById("detail-img").style.backgroundImage = `url(${result.img})`;
+            document.getElementById("detail_title").innerHTML = result.title;
+            document.getElementById("detail_price_now").innerHTML = result.price_now + `₽`;
+            if (result.price_past === result.price_now) {
+                document.getElementById("detail_price_tgs").style.display = "none";
+            } else {
+                document.getElementById("detail_price_tgs").innerHTML = result.price_past + `₽`;
+            }
+            document.getElementById("detail_price_tgs").innerHTML = result.price_past + `₽`;
+            document.getElementById("detail_total_price").innerHTML = result.price_now + `₽`;
+            document.getElementById("link-to-buy").action = `/payment/${result.title}`;
+            document.getElementById("final-card").style.visibility = `visible`;
+            
+
+        },
+
+        renderResult : (result , props) => {
+            //console.log(props)
+            //console.log(result.title)
+            //let group = ''
+            
+            //if(result.index % 2 == 0){
+            //    group = 'Group'
+            //}
+            
+            //${group}
+
+            return `
+            <div class="container search-results-container">
+                <div ${props}>
+                    <div class="row">
+                        <div class="col-8 offset-2 search-results-wrapper">
+                            <div class="row search-results-row align-items-center">
+                            <div class="col-2 search-game-img" style="background-image: url(${result.img})"></div>
+                            <div class="col-5 search-game-name">${result.title}</div>
+                            <div class="col">
+                                <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                                <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                                <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                            </div>
+                            {% if result.price_past == result.price_now %}
+                           
+                                <div class="col-2 search-game-price">
+                                    <div class="row">
+                                        <div class="col">
+                                            ${result.price_now} ₽
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% else %}
+                            <div class="col-1 discount-badge">-${result.discount}%</div>
+                            
+                                <div class="col-2 search-game-price">
+                                    <div class="row">
+                                        <div class="col old-price">
+                                            ${result.price_past} ₽
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            ${result.price_now} ₽
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endif %}
+                        </div>            
+                    </div>
+                </div>
+            </div>
+            `}
+        });
+</script>
+
+
+<!--
+result.title,
+result.epic_id,
+result.title,
+result.img,
+result.platforms,
+result.price_now,
+result.flag_is_discount,
+result.discount,
+result.price_past,
+result.timestrap,
+-->
+
+  <div id="final-card" class="container" style="visibility: hidden;">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="detail-img" class="col-2 search-game-img" style=""></div>
+        <h2 id="detail_title"></h2>
+        <div id="detail_platforms" class="col">
+            <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+            <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+            <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3 id="detail_price_now"></h3>
+        <h3 id="detail_price_tgs"></h3>
+        <h3 id="detail_total_price"></h3>
+        
+        <form id="link-to-buy" action="" method="get">
+            {% csrf_token %}
+            <!--{{ form }}-->
+            <button onclick="{% bot_first_signal %}">Купить игру</button>
+            <!--<button type="submit">OK</button>-->
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  </body>
+</html>
+
+
+                    <!-- Result 1 -->
+<!--                    <div class="row search-results-row align-items-center">
+                    
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">Call of Duty®: Modern Warfare® II</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                    </div>
+                    <div class="col-1 discount-badge">-50%</div>
+                    
+                    
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+-->                
+                <!-- 
+                <div class="row search-results-row align-items-center">
+                    
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">Call of Duty®: Black Ops®</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                  
+                    </div>
+                <div class="col-1 discount-badge">-50%</div>
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+   
+
+
+
+
+                <div class="row search-results-row align-items-center">
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">theHunter: Call of the Wild™</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon d-none">
+                        
+                    </div>
+                    <div class="col-1 discount-badge d-none">-50%</div>
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price d-none">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+-->
+            
+<!--            </div>
+          </div>
+          
+          
+         
+          
+   
+      </div>
+      
+-->
+      
+    
+
+
+<!--
+<script type="text/javascript" src="{% static 'js/handlebars.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/typeahead.bundle.js' %}"></script>
+-->
+

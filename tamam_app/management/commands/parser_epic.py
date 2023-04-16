@@ -1,9 +1,11 @@
+#(python manage.py -h) - получение справки по всем командам, но покруче
+
 from django.core.management.base import BaseCommand
 from tamam_app.models import EpicGameModel
 
 #--------------django--------------
 
-import json
+import requests, json
 import cloudscraper
 #from datetime import datetime
 
@@ -34,11 +36,7 @@ def parser(os):
 			epic_id = e['id']
 			img = e['keyImages'][0]['url']
 			price_now = e['currentPrice']
-			try:
-				discountPrice = e['price']['totalPrice']['discountPrice']
-			except:
-				print(title)
-				break
+			discountPrice = e['price']['totalPrice']['discountPrice']
 			discount = e['price']['totalPrice']['discount']
 			if discount == 0:
 				flag_is_discount = False

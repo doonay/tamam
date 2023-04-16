@@ -1,0 +1,264 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Main CSS -->  
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+  </head>
+  <body>
+    <div class="container-fluid steam-bg">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-6 offset-2">
+                    <img class="header-logo" src="{% static 'assets/img/steam-logo-white-44.svg' %}">
+                    <h1>Покупка игр и пополнение кошелька Steam</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      <div class="container buy-tab-menu">
+        <div class="row">
+          <div class="col-8 offset-2">
+            <span class="buy-tab-active">Купить игры</span> <span class="buy-tab">Пополнить кошелек</span>
+            </div>
+          </div>
+      </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-8 offset-2 search-wrapper">
+                    <div id="autocomplete" class="input-group">
+                        <span class="input-group-text search-ico">
+                            <img src="{% static 'assets/img/search-ico.png' %}" style="width: 24px; height: 24px">
+                        </span>
+                        <input type="search" class="typeahead form-control search-field" placeholder="Поиск по играм" aria-label="Поиск" aria-describedby="basic-addon1">
+                        <div class="container search-results-container autocomplete-result-list"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+<script> //autocomplete
+
+
+
+    new Autocomplete('#autocomplete' , {
+        search : input => {
+        //console.log(input);
+        const url = `/get-games/?search=${input}`;
+        //console.log(url); // перемещено перед return
+        return new Promise(resolve => {
+            fetch(url)
+            .then(response=>response.json())
+            .then(data => {
+                //console.log(data.payload);
+                resolve(data.payload);
+                });
+            });
+        },
+
+        renderResult : (result , props) => {
+            console.log(props)
+            //console.log(result.title)
+            let group = ''
+          
+            if(result.index % 3 === 0){
+                group = '<li class="group">Group</li>'
+            }
+            
+           
+            return `
+                
+              
+                    ${group}
+                        <div class="row" ${props}>
+                            <div class="col-8 offset-2 search-results-wrapper">
+                                <div class="row search-results-row align-items-center">
+                                    <div class="col-2 search-game-img" style="background-image: url(${result.img})"></div>
+                                    <div class="col-5 search-game-name">${result.title}</div>
+                                    <div class="col">
+                                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                                    </div>
+                                    <div class="col-1 discount-badge">-${result.discount}%</div>
+                                    <div class="col-2 search-game-price">
+                                        <div class="row">
+                                            <div class="col old-price">
+                                                ${result.price_past} ₽
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                ${result.price_now} ₽
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+             
+                `;
+            }
+
+    });
+
+
+
+
+</script>
+
+
+<!--
+result.title,
+result.epic_id,
+result.title,
+result.img,
+result.platforms,
+result.price_now,
+result.flag_is_discount,
+result.discount,
+result.price_past,
+result.timestrap,
+-->
+
+<!--
+
+        <div class="container search-results-container">
+            <div class="row">
+                <div class="col-8 offset-2 search-results-wrapper">
+-->
+                    <!-- Result 1 -->
+<!--                    <div class="row search-results-row align-items-center">
+                    
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">Call of Duty®: Modern Warfare® II</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                    </div>
+                    <div class="col-1 discount-badge">-50%</div>
+                    
+                    
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+-->                
+                <!-- Result 1 -->
+<!--                <div class="row search-results-row align-items-center">
+                    
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">Call of Duty®: Black Ops®</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon">
+                  
+                    </div>
+                <div class="col-1 discount-badge">-50%</div>
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+                
+-->                <!-- Result 1 -->
+<!--                <div class="row search-results-row align-items-center">
+                    <div class="col-2 search-game-img" style="background-image: url({% static 'assets/img/staam-bg.jpg' %})"></div>
+                    <div class="col-5 search-game-name">theHunter: Call of the Wild™</div>
+                    <div class="col">
+                        <img src="{% static 'assets/img/win-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/steam-ico.png' %}" class="platform-icon">
+                        <img src="{% static 'assets/img/mac-ico.png' %}" class="platform-icon d-none">
+                        
+                    </div>
+                    <div class="col-1 discount-badge d-none">-50%</div>
+                    <div class="col-2 search-game-price">
+                        <div class="row">
+                            <div class="col old-price d-none">
+                                    24 568 ₽
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                    12 886 ₽
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                
+                </div>
+-->
+            
+<!--            </div>
+          </div>
+          
+          
+         
+          
+   
+      </div>
+      
+-->
+      
+    
+
+
+<!--
+<script type="text/javascript" src="{% static 'js/handlebars.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/typeahead.bundle.js' %}"></script>
+-->
+
+
+  </body>
+</html>

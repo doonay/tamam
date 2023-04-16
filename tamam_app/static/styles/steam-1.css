@@ -1,0 +1,312 @@
+
+html {
+	font-size:62.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 144rem;
+}.steam-1-jvj {
+  box-sizing: border-box;
+  padding-top: 2rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+.steam-1-jvj .auto-group-oo5m-us9 {
+  margin: 0rem 8.4rem 1.7rem 8.4rem;
+  width: calc(100% - 16.8rem);
+  height: 5.1rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK {
+  width: 127.2rem;
+  height: 4.7707rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .group-2-M8o {
+  margin-right: 72.2696rem;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .group-2-M8o .auto-group-nfnb-SR9 {
+  margin: 0rem 0.687rem 0.126rem 0rem;
+  width: 3.7435rem;
+  height: 4.645rem;
+  position: relative;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .group-2-M8o .auto-group-skrj-6Vh {
+  width: 8.5rem;
+  height: 4.599rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .group-2-M8o .auto-group-skrj-6Vh .tamam-mLw {
+  width: 8.5rem;
+  height: 3.3rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 2.5758rem;
+  font-weight: 400;
+  line-height: 1.26;
+  letter-spacing: -0.1545rem;
+  color: #000000;
+  font-family: Outfit, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .group-2-M8o .auto-group-skrj-6Vh .game-store-TQ7 {
+  width: 7.9rem;
+  height: 1.8rem;
+  position: absolute;
+  left: 0.3263rem;
+  top: 2.799rem;
+  font-size: 1.4167rem;
+  font-weight: 400;
+  line-height: 1.26;
+  letter-spacing: -0.085rem;
+  color: #c3c3db;
+  font-family: Outfit, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h {
+  margin: 1.1854rem 0;
+  height: calc(100% - 2.3707rem);
+  display: flex;
+  column-gap: 4.1rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-2-zRy {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-2-zRy .frame-1-VtX {
+  margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-2-zRy .playstation-vD9 {
+  margin-top: 0.1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.175;
+  letter-spacing: -0.054rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-3-v6f {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-3-v6f .frame-1-kLb {
+  margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-3-v6f .steam-Nsm {
+  margin-top: 0.1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.175;
+  letter-spacing: -0.054rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-4-Ssd {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-4-Ssd .frame-1-nRh {
+  margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .frame-6-jNK .frame-5-N9h .frame-4-Ssd .epic-games-hYf {
+  margin-top: 0.1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.175;
+  letter-spacing: -0.054rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-oo5m-us9 .rectangle-9-vAX {
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  left: 105.7rem;
+  top: 4.6rem;
+  background-color: #000000;
+  border-radius: 10rem;
+}
+.steam-1-jvj .auto-group-dmmm-YSo {
+  box-sizing: border-box;
+  padding: 6rem 31rem 5.2rem 30rem;
+  width: 100%;
+  height: 31.4rem;
+  background-color: rgba(11, 0, 146, 0.400000006);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../assets/rectangle-7-bg.png');
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-dmmm-YSo .frame-21-dUF {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.steam-1-jvj .auto-group-dmmm-YSo .frame-21-dUF .frame-1-Zco {
+  margin-bottom: 3rem;
+  width: 6.4rem;
+  height: 6.4rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-dmmm-YSo .frame-21-dUF .steam-43m {
+  max-width: 83rem;
+  font-size: 5.4rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.162rem;
+  color: #ffffff;
+  font-family: Raleway, 'Source Sans Pro';
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 {
+  box-sizing: border-box;
+  padding: 5rem 30rem 45.8rem 30rem;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-19-68s {
+  margin: 0rem 26.9rem 3rem 0rem;
+  width: 57.1rem;
+  height: 3.2rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-19-68s .item--wfH {
+  width: 21.9rem;
+  height: 3.2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.096rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-19-68s .item--Y9H {
+  width: 35.8rem;
+  height: 3.2rem;
+  position: absolute;
+  left: 21.3rem;
+  top: 0;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.096rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd {
+  box-sizing: border-box;
+  padding: 1.4rem 2rem;
+  width: 100%;
+  height: 5.2rem;
+  background-color: #ebedf1;
+  border-radius: 100rem;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd .frame-12-Aps {
+  width: 20.3rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd .frame-12-Aps .frame-11-sjH {
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd .frame-12-Aps .auto-group-ghek-oN3 {
+  box-sizing: border-box;
+  padding: 0.3rem 0rem 0.3rem 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd .frame-12-Aps .auto-group-ghek-oN3 .line-1-SR1 {
+  margin-right: 1.9rem;
+  width: 0.1rem;
+  height: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.200000003);
+  flex-shrink: 0;
+}
+.steam-1-jvj .auto-group-n33y-Q19 .frame-13-ebd .frame-12-Aps .auto-group-ghek-oN3 .item--YU3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.054rem;
+  color: #000000;
+  font-family: Raleway, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
