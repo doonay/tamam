@@ -1,4 +1,4 @@
-## Парсеры, которые запускаются по плану и собирают информацию по играм в базу PostgreSQL
+## Абстрактный план проекта
 ![](ProjectScheme.png)<br/>
 Создаем таблицы в PostgreSQL c помощью скрипта: python table_create_alchemy.py \<company\><br/>
 Например:
