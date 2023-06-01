@@ -1,5 +1,6 @@
 # Django settings:
 config.ini
+config.py
 
 # Django stuff:
 *.log
