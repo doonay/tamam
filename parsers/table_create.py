@@ -18,6 +18,10 @@ def create_table(table_name):
         else:
             Game.__table__.create(bind=engine)
             print(f'[INFO] Table {table_name}_games created successfully.')
+            # Сброс автоинкрементного значения
+            sequence_name = f'{table_name}_games_id_seq'
+            engine.execute(f"SELECT setval('{sequence_name}', 1, false);")
+            print(f'[INFO] Auto-increment sequence {sequence_name} reset.')
     except Exception as ex:
         session.rollback()
         print('[INFO] Error while working with PostgreSQL:', ex)

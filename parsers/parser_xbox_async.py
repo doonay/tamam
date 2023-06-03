@@ -74,38 +74,40 @@ async def xbox_parser():
 async def test_xbox_parser():
     company = 'xbox'
     games_list = []
+    try:
+        async with aiohttp.ClientSession() as session:
+            game_count = 1
+            last_game = 1
 
-    # ----test2.1
-    games_dict = {
-        'game_id': "9MT8PTGVHX2P",
-        'title': "Halo: Коллекция Мастера Чифа",
-        'platforms': "{XBOX}",
-        'base_price': 3997,
-        'discounted_price': 0,
-        'discount': 100,
-        'img': "https://store-images.s-microsoft.com/image/apps.16930.13817186670444302.148c432a-9fce-4c7d-bf13-8a2bd3a527b3.99d16324-9915-41d7-a388-fa5dd98940cb?h=60&format=jpg"
-    }
-    # ----test2.2
-    '''
-    games_dict = {
-        'game_id': "9MT8PTGVHX2P",
-        'title': "Halo: Коллекция Мастера Чифа",
-        'platforms': "{XBOX}",
-        'base_price': 0,
-        'discounted_price': 0,
-        'discount': 0,
-        'img': "https://store-images.s-microsoft.com/image/apps.16930.13817186670444302.148c432a-9fce-4c7d-bf13-8a2bd3a527b3.99d16324-9915-41d7-a388-fa5dd98940cb?h=60&format=jpg"
-    }
-    '''
-    # ----test3
-    # ----test3
 
-    games_list.append(games_dict)
+
+            #-------тестируемые данные-------
+            games_dict = {
+                    'game_id': "BSZM480TSWGP",
+                    'title': "Dishonored 2",
+                    'platforms': {"XBOX"},
+                    'base_price': 2999,
+                    'discounted_price': 2999,
+                    'discount': 0,
+                    'img': "https://store-images.s-microsoft.com/image/apps.26992.70043444627144466.07c9aa2e-cabd-4198-941b-534a009f5e9b.f287ebaa-4d8e-465e-83d0-be5eaeb48869?h=60&format=jpg"
+            }
+            #-----тестируемые данные-------------
+
+
+
+            games_list.append(games_dict)
+            print(
+                f'[INFO] [{game_count}/{last_game}] {games_dict["title"]} was successfully scraped')
+            game_count += 1
+
+    except aiohttp.ClientError as e:
+        print(f'[ERROR] An error occurred during the request: {str(e)}')
+
     print(f'[INFO] Adding {len(games_list)} games to database...')
     db_insert_batch(company, games_list)
-    print('done!')
+    print('Мы снова в парсере!')
 
 
 if __name__ == '__main__':
-    asyncio.run(xbox_parser())
-    # asyncio.run(test_xbox_parser())
+    #asyncio.run(xbox_parser())
+    asyncio.run(test_xbox_parser())
