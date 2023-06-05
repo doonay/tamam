@@ -10,7 +10,7 @@ class Game(Base):
     __tablename__ = 'games'
 
     id = Column(Integer, primary_key=True)
-    game_id = Column(String)
+    product_id = Column(String)
     title = Column(String)
     platforms = Column(ARRAY(String))
     base_price = Column(Integer)
