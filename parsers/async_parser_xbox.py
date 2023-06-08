@@ -1,11 +1,9 @@
 import aiohttp
 import asyncio
 from tamam_logger import tamam_logger
-from async_db_insert import async_db_insert
+from db_insert_simple import db_insert
 #from db_insert import db_insert_batch
 import json
-
-
 
 async def get_product_data(session, ids_list):
     url = f'https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds={ids_list}&market=RU&languages=RU-RU&MS-CV=DGU1mcuYo0WMMp+F.1'
@@ -77,10 +75,7 @@ async def get_all_products():
                 all_pages_items.append(redata_dict)
 
         TABLE_NAME = __name__
-        # Запуск асинхронной функции из синхронной функции
-        asyncio.run(async_db_insert(TABLE_NAME, all_pages_items))
-
-
+        db_insert(TABLE_NAME, all_pages_items)
 
         with open('test_products.txt', 'w', encoding='utf8') as file:
             json.dump(all_pages_items, file, ensure_ascii=False)
@@ -191,21 +186,32 @@ def xbox_parser():
         file.write(str(games_list))
     '''
 if __name__ == '__main__':
+    tamam_logger("DEBUG", "---START---")
     #xbox_parser()
 
     test_data = [
         {
-            "product_id": "4TEST",
-            "title": "4The Walking Test",
+            "product_id": "5TEST",
+            "title": "5The Walking Test",
             "platforms": ["XBOX"],
             "base_price": 1998,
             "discounted_price": 13,
             "discount": 99,
-            "img": "4https://store-image"
+            "img": "5https://store-image"
+        },
+                {
+            "product_id": "6TEST",
+            "title": "6The Walking Test",
+            "platforms": ["XBOX"],
+            "base_price": 1998,
+            "discounted_price": 13,
+            "discount": 99,
+            "img": "6https://store-image"
         }
     ]
     
     import os
     TABLE_NAME = os.path.basename(__file__).split('.')[0]
-    print(TABLE_NAME)
-    asyncio.run(async_db_insert(TABLE_NAME, test_data))
+    tamam_logger("DEBUG", f"Задано имя таблицы {TABLE_NAME}")
+    db_insert(TABLE_NAME, test_data)
+    tamam_logger("DEBUG", "--------------------------------------")

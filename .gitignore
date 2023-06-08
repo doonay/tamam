@@ -1,3 +1,6 @@
+# custom
+parsers/trash/
+
 # Django settings:
 config.ini
 config.py
