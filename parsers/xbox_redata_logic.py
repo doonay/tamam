@@ -1,4 +1,4 @@
-def insert_logic(one_product):
+def redata_logic(one_product):
     #all_pages_items = []
     #for all_pages_item in product_results: 
     #    for one_page_item in all_pages_item:
