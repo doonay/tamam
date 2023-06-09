@@ -1,24 +1,18 @@
 import schedule
-import parser_playstation
-import parser_xbox
-
-from table_delete_alchemy import delete_table
-from table_create_alchemy import create_table
+#import parser_playstation
+import xbox
+from tamam_logger import tamam_logger
 
 def run_parsers():
-    #delete_table('xbox')
-    #create_table('xbox')
-    #parser_xbox.xbox_parser()
-    #delete_table('playstation')
-    #create_table('playstation')
-    parser_playstation.playstation_parser()
+    tamam_logger('DEBUG', f'Таймер запускает парсеры, время {party_time}')
+    xbox.main()
 
-
-def main():
-    schedule.every().day.at('12:12').do(run_parsers)
+def main(party_time):
+    schedule.every().day.at(party_time).do(run_parsers)
 
     while True:
         schedule.run_pending()
 
 if __name__ == '__main__':
-    main()
+    party_time = '18:08'
+    main(party_time)

@@ -2,10 +2,8 @@ import asyncio
 import aiohttp
 from tamam_logger import tamam_logger
 from insert_games import db_insert
-import time
 import requests
-
-from xbox_insert_logic import insert_logic
+from xbox_redata_logic import redata_logic
 
 def get_games_ids() -> list: # список айдишников всех игр
     url = 'https://catalog.gamepass.com/sigls/v2?id=f6f1f99f-9b49-4ccd-b3bf-4d9767a77f5e&language=ru-ru&market=RU'
@@ -33,14 +31,14 @@ async def parser():
         all_redata_games = []
         for all_pages_item in product_results:
             for one_page_item in all_pages_item:
-                one_redata_game = insert_logic(one_page_item)
+                one_redata_game = redata_logic(one_page_item)
                 all_redata_games.append(one_redata_game)
         return all_redata_games    
 
 def main():
     import os
     table_name = os.path.basename(__file__).split('.')[0]
-    tamam_logger("DEBUG", f"Задано имя таблицы {table_name}")
+    #tamam_logger("DEBUG", f"Задано имя таблицы {table_name}")
     all_redata_games = asyncio.run(parser())
     db_insert(table_name, all_redata_games)
     

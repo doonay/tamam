@@ -1,12 +1,9 @@
 from sqlalchemy import Column, Integer, String, ARRAY, SmallInteger, TIMESTAMP
-#from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from sqlalchemy.orm import declarative_base
-from datetime import datetime
 
 
 Base = declarative_base()
-
 def create_game_class(table_name):
     class Game(Base):
         __tablename__ = table_name
@@ -19,5 +16,5 @@ def create_game_class(table_name):
         discount = Column(SmallInteger)
         img = Column(String)
         last_modified = Column(TIMESTAMP, default=func.now())
-    
+
     return Game
