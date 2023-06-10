@@ -1,7 +1,8 @@
 import os
 import loguru
 
-logs_dir = os.path.join(".", "logs")
+# мультиплатформенное вычисление пути для логов
+logs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "logs"))
 os.makedirs(logs_dir, exist_ok=True)
 log_path = os.path.join(logs_dir, "tamam.log")
 
