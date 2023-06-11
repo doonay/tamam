@@ -67,7 +67,10 @@ def db_insert(table_name, games_data_list):
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{database}')
     Session = sessionmaker(bind=engine)
     session = Session()
-    Game = create_game_class(f'{table_name}_games')
+    try:
+        Game = create_game_class(f'{table_name}_games')
+    except Exception as ex:
+        tamam_logger("ERROR", f"{str(ex)}")
     try:
         Game.__table__.create(bind=engine)
         tamam_logger("DEBUG", f"Таблица {table_name}_games создана")

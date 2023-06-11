@@ -4,7 +4,7 @@ import xbox
 from tamam_logger import tamam_logger
 
 def run_parsers():
-    tamam_logger('DEBUG', f'Таймер запускает парсеры, время {party_time}')
+    tamam_logger('DEBUG', f'Таймер запускает парсеры, время 13:05')
     xbox.main()
 
 def main(party_time):
@@ -14,5 +14,4 @@ def main(party_time):
         schedule.run_pending()
 
 if __name__ == '__main__':
-    party_time = '18:08'
-    main(party_time)
+    main('13:05')

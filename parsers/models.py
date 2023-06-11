@@ -15,6 +15,6 @@ def create_game_class(table_name):
         discounted_price = Column(Integer)
         discount = Column(SmallInteger)
         img = Column(String)
-        last_modified = Column(TIMESTAMP, default=func.now())
+        last_modified = Column(TIMESTAMP, default=func.now(), onupdate=func.now())
 
     return Game
