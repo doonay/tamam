@@ -1,5 +1,7 @@
 # custom
 parsers/trash/
+drf/trash/
+reactapp/trash
 
 # Django settings:
 config.ini

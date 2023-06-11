@@ -2,9 +2,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import ProgrammingError
 from models import create_game_class
-from config import user, password, host, port, database
 from tamam_logger import tamam_logger
+import os
+import sys
 
+CONFIG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, CONFIG_DIR)
+from config import host, user, password, database, port
 
 def insert_logic(session, existing_game, new_game):
     if existing_game:# игра существует в базе
