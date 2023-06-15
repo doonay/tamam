@@ -1,13 +1,10 @@
 def redata_logic(one_product):
-    #all_pages_items = []
-    #for all_pages_item in product_results: 
-    #    for one_page_item in all_pages_item:
     redata_dict = {}
-
+    redata_dict["platform"] = 'xbox'
     redata_dict["product_id"] = one_product["ProductId"]
-    redata_dict["title"] = one_product["LocalizedProperties"][0]["SortTitle"]
-    # Пока жестко прописываю платформу, ибо заведомо знаю, что это икс бокс
-    redata_dict["platforms"] = ['XBOX']
+    redata_dict['title'] = one_product['LocalizedProperties'][0]['ProductTitle'] # строго для поля с кодировкой utf8
+    # Пока жестко прописываю платформу, написать алгоритм поиска всех возможных подплатформ
+    redata_dict["sub_platforms"] = ['XBOX']
     try:
         base_price = int(one_product["DisplaySkuAvailabilities"][0]["Availabilities"][0]["OrderManagementData"]["Price"]["ListPrice"] * 100)
         redata_dict["base_price"] = base_price

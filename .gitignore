@@ -1,6 +1,9 @@
 # custom
+trash/
 parsers/trash/
-drf/trash/
+drf1/trash/
+drf2/trash/
+drf3/trash/
 reactapp/trash
 
 # Django settings:

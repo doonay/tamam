@@ -1,14 +1,13 @@
 import os
-import loguru
+#import loguru
+import datetime
+from loguru import logger
 
 # мультиплатформенное вычисление пути для логов
 logs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "logs"))
 os.makedirs(logs_dir, exist_ok=True)
 log_path = os.path.join(logs_dir, "tamam.log")
 
-logger = loguru.logger
-
-# Конфигурация
 logger.remove()
 logger.add(
     log_path,
@@ -19,4 +18,5 @@ logger.add(
 )
 
 def tamam_logger(level, message):
-    logger.log(level, message)
+    current_time = datetime.datetime.now()
+    logger.log(level, message, time=current_time)
