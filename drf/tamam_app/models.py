@@ -47,9 +47,9 @@ class Order(models.Model):
         verbose_name = 'Order'
 
 class XboxGame(Game):
-    platform = models.ForeignKey(Platform, related_name='xbox_games', on_delete=models.CASCADE)
-    #platform = models.ForeignKey('Platform', related_name='xbox_games', default='playstation', on_delete=models.CASCADE, limit_choices_to={'xbox_games': 1})
-    #platform = 'xbox'
+    #platform = models.ForeignKey(Platform, related_name='xbox_games', on_delete=models.CASCADE)
+    platform = models.ForeignKey('Platform', related_name='xbox_games', default='playstation', on_delete=models.CASCADE, limit_choices_to={'xbox_games': 1})
+
     class Meta:
         #managed = False # с False джанга не редактирует таблицу
         db_table = 'xbox_games'
