@@ -1,0 +1,108 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 200px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-around; Элементы равномерно распределяются по горизонтали с равными промежутками вокруг каждого элемента.*/
+    justify-content: space-evenly;
+    /*равномерно по горизонтали с равными промежутками между элементами и вокруг первого и последнего элементов.*/
+    /*justify-content: space-between; Элементы равномерно распределяются по горизонтали с равными промежутками между ними.*/
+    /*justify-content: center; Элементы выравниваются по центру главной оси.*/
+    /*justify-content: flex-start; Элементы выравниваются по началу главной оси (по умолчанию).*/
+    /*justify-content: flex-end; Элементы выравниваются по концу главной оси.*/
+    border: 1px solid black;
+    height: 200px;
+    border-radius: 100px;
+    background-color: gray;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    /*выравнивает текст внутри элемента по горизонтали.*/
+    width: 70%;
+    /*устанавливает ширину элемента.*/
+    height: 50px;
+    /*устанавливает высоту элемента.*/
+    /*outline: none; устанавливает стиль и цвет контура элемента при фокусе.*/
+    /*padding-left: 20px; добавляет отступ слева*/
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    /*устанавливает внешние отступы элемента, влияющие на его положение относительно других элементов.*/
+    padding: 0;
+    /*устанавливает отступы внутри элемента, между текстом и границей.*/
+}
+
+.search-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.search-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    height: 80%;
+}
+
+.search-input {
+    /*border-radius: 200px; /*устанавливает радиус скругления углов границы элемента.*/
+    color: black;
+    /*устанавливает цвет текста внутри элемента.*/
+    background-color: white;
+    /*устанавливает цвет фона элемента.*/
+    border: 1px solid black;
+    /*устанавливает стиль, толщину и цвет границы элемента.*/
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    /*добавляет тень вокруг элемента.*/
+    text-align: left;
+    /*выравнивает текст внутри элемента по горизонтали.*/
+    width: 80%;
+    /*устанавливает ширину элемента.*/
+    height: 30px;
+    /*устанавливает высоту элемента.*/
+    outline: none;
+    /*устанавливает стиль и цвет контура элемента при фокусе.*/
+    padding-left: 20px;
+    /* добавляем отступ слева для иконки */
+
+    /*background-image: url("search-ico.png"); путь к вашей иконке */
+    /*background-image: url("{% static 'search-ico.png' %}");*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: left center; устанавливаем позицию иконки слева по центру */
+    /*background-size: 16px; устанавливаем размер иконки */
+
+    /*font-family: //устанавливает семейство шрифтов для текста внутри элемента.*/
+    /*font-size: //устанавливает размер шрифта текста внутри элемента.*/
+    /*cursor: //устанавливает тип курсора при наведении на элемент.*/
+    /*font-weight: //устанавливает насыщенность шрифта текста внутри элемента.*/
+    /*margin: //устанавливает внешние отступы элемента, влияющие на его положение относительно других элементов.*/
+    /*padding: //устанавливает отступы внутри элемента, между текстом и границей.*/
+    /*text-decoration: //устанавливает стиль декорации текста, такой как подчеркивание или зачеркивание.*/
+    /*text-transform: //устанавливает преобразование регистра текста, например, в верхний или нижний регистр.*/
+}
+
+/* далее сбиваем стандартный стиль инпута */
+input[type="text"]::-ms-clear,
+input[type="text"]::-ms-reveal {
+    display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}

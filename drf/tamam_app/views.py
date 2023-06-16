@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 from .models import Platform, Order, XboxGame, PlaystationGame, SteamGame
@@ -60,9 +60,9 @@ class PlaystationGameView(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        queryset = PlayStationGame.objects.all()
+        queryset = PlaystationGame.objects.all()
         user = get_object_or_404(queryset, pk=pk)
-        serializer = PlayStationGameSerializer(user)
+        serializer = PlaystationGameSerializer(user)
         return Response(serializer.data)
 
 class SteamGameView(viewsets.ViewSet):
@@ -78,3 +78,5 @@ class SteamGameView(viewsets.ViewSet):
         serializer = SteamGameSerializer(user)
         return Response(serializer.data)
 
+def simple_view(request):
+    return render(request, 'tamam_app/index.html')

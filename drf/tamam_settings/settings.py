@@ -12,6 +12,7 @@ SECRET_KEY = 'django-insecure-i5xd++t)srt9b!2ehx=nefe7xotu#qvq8ah&0(c0zdmnd#c4i*
 DEBUG = True
 ALLOWED_HOSTS = []
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -19,10 +20,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'tamam_app'
-
+    'tamam_app.apps.GameConfig'
 ]
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -31,11 +32,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 ROOT_URLCONF = 'tamam_settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,3 +80,12 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOWED_ORIGIN = ['*']
+'''
+CORS_ALLOWED_ORIGIN = [
+    'http://localhost:3000',  # Замените на адрес вашего React-приложения
+]
+'''
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
